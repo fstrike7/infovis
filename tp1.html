@@ -1,37 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <link rel="stylesheet" src="https://fstrike7.github.io/infovis/style.css">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Infovis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Infovis - Prototipo</title>
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --surface:#ffffff;
+      --text:#111418;
+      --muted:#5b6572;
+      --link:#0f62fe;
+      --maxw: 900px;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;padding:0;background:var(--bg);color:var(--text);
+      font-family:'Inter',system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6
+    }
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:var(--maxw);margin:0 auto;padding:28px 18px}
+    header{border-bottom:1px solid #e7ebf0}
+    .title{
+      text-align:center;
+      margin:6px 0 2px;
+      font-weight:800;
+      letter-spacing:.2px;
+      font-size: clamp(26px, 3vw, 38px);
+    }
+    .subtitle{
+      text-align:center;
+      color:var(--muted);
+      margin:0 0 16px;
+      font-weight:600;
+      font-size: clamp(14px, 1.5vw, 16px);
+    }
+    .meta{
+      display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 0 18px;color:var(--muted);font-size:.95rem;
+    }
+    .tag{
+      display:inline-block;padding:2px 8px;border-radius:999px;background:#f5f7fa;border:1px solid #e7ebf0;color:#5b6572;font-size:.85rem;margin:0 4px 4px 0
+    }
+    section{padding:16px 0;border-bottom:1px solid #eef2f6}
+    section:last-of-type{border-bottom:none}
+    .question{
+      text-align:center;margin: 0 0 12px;
+      font-size: clamp(20px, 2.2vw, 24px);
+      line-height:1.25;
+      font-weight:700;
+    }
+    figure{margin:0}
+    .viz{width:100%;border:0;display:block;background:#fafbfc}
+    object.viz{height:auto;width:100%}
+    figcaption{color:var(--muted);font-size:.95rem;margin-top:8px;text-align:center}
+    .pill-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+    .pill{background:#f5f7fa;border:1px solid #e7ebf0;color:#5b6572;padding:6px 10px;border-radius:999px;font-size:.92rem}
+    .btn{
+      display:inline-block;padding:10px 14px;border-radius:8px;border:1px solid #e7ebf0;background:#f8fafc;color:#1f2937;font-weight:600;
+    }
+    .btn:hover{background:#eef2f6}
+    footer{color:var(--muted);text-align:center;padding:28px 0 22px;border-top:1px solid #e7ebf0;margin-top:12px}
+  </style>
 </head>
 <body>
 
-  <h2>Trabajo práctico - prótotipo</h1>
-    <h3><i>Libros agrupados por tipo, sumarizados por cántidad de páginas</i></h3>
-    <div align="center"><h3>¿Cuántos libros terminé cada año?</h3></div>
-    <div align="center"><h3>¿Qué proporción de mis lecturas son novelas frente a cuentos, cómics o mangas?</h3></div>
-    <object data="https://fstrike7.github.io/infovis/tp/libros_actualizados.svg" type="image/svg+xml"></object>
-<div class="flourish-embed flourish-hierarchy" data-src="visualisation/24751552"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/24751552/thumbnail" width="100%" alt="hierarchy visualization" /></noscript></div>    <h4>¿En qué años terminé libros más extensos?</h4>
-   
-<i>Divididos por año</i>    <br> 
-    <p>¿Qué fue lo más extenso que leí en el año?</p>
-    <div class="flourish-embed flourish-scatter" data-src="visualisation/24751572"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/24751572/thumbnail" width="100%" alt="scatter visualization" /></noscript></div>
-    <br><br>
-    <div align="center"><h3>¿Qué tipo de libros terminé más en 2024 y cuáles en 2025?</h3></div>
-    <div align="center"><h3>¿Qué año tuve lecturas más “densas” en páginas totales?</h3></div>
-   
-    <object data="https://fstrike7.github.io/infovis/tp/finalizados_por_anio_por_tipo.svg" type="image/svg+xml"></object>
-     <i>Divididos por año, pero además por tipo, dando a entender que leí menos novelas en 2025.</i><br>
+<header>
+  <div class="container">
+    <h1 class="title">Trabajo Práctico — Prototipo</h1>
+    <p class="subtitle"><i>Lecturas personales</i></p>
+    <div class="meta">
+      <span class="tag">RAWGraphs</span>
+      <span class="tag">Flourish</span>
+      <span class="tag">DataWrapper</span>
+      <span class="tag">Dataset propio</span>
+    </div>
+  </div>
+</header>
 
-    <b>Preguntas planteadas:</b>
+<main class="container">
 
-<div align="center">¿Existe relación entre páginas y capítulos?</div>
-<div align="center">¿Cuál fue el libro más extenso y el más corto que leí?</div>
-<div align="center">¿Qué tipo de libros suele tener más páginas en promedio? <-</div>
-<div align="center">¿Qué tipo de libro tiendo a terminar más rápido?</div>
-<div align="center">¿Qué tipo de libro domina en cantidad total de páginas leídas?</div>
+  <!-- Bloque 1 -->
+  <section>
+    <h2 class="question">¿Cuántos libros terminé cada año?</h2>
+    <figure>
+      <object class="viz" data="https://fstrike7.github.io/infovis/tp/finalizados_por_anio_por_tipo.svg" type="image/svg+xml"></object>
+      <figcaption>Distribución anual de libros finalizados, desglosado por tipo.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Bloque 2 -->
+  <section>
+    <h2 class="question">¿Qué proporción de mis lecturas son novelas frente a cuentos, cómics o mangas?</h2>
+    <figure>
+      <div class="viz flourish-embed flourish-hierarchy" data-src="visualisation/24751552">
+        <script src="https://public.flourish.studio/resources/embed.js"></script>
+        <noscript><img src="https://public.flourish.studio/visualisation/24751552/thumbnail" width="100%" alt="hierarchy visualization" /></noscript>
+      </div>
+      <figcaption>Treemap interactivo por tipo de libro.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Bloque 3 -->
+  <section>
+    <h2 class="question">¿En qué años terminé libros más extensos?</h2>
+    <figure>
+      <div class="viz flourish-embed flourish-scatter" data-src="visualisation/24751572">
+        <script src="https://public.flourish.studio/resources/embed.js"></script>
+        <noscript><img src="https://public.flourish.studio/visualisation/24751572/thumbnail" width="100%" alt="scatter visualization" /></noscript>
+      </div>
+      <figcaption>Relación entre páginas y año de finalización.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Bloque 4 -->
+  <section>
+    <h2 class="question">¿Existe relación entre páginas y capítulos?</h2>
+    <figure>
+      <object class="viz" data="https://fstrike7.github.io/infovis/tp/libros_actualizados.svg" type="image/svg+xml"></object>
+      <figcaption>Cada punto es un libro; tamaño/posición por páginas y capítulos.</figcaption>
+    </figure>
+  </section>
+
+  <!-- preguntas -->
+  <section>
+    <h3 class="question" style="font-size:20px">Otras preguntas para explorar</h3>
+    <div class="pill-list">
+      <span class="pill">¿Qué autores aparecen más veces?</span>
+      <span class="pill">Top 3 más largos y más cortos</span>
+      <span class="pill">Páginas promedio por tipo</span>
+      <span class="pill">Capítulos por cada 100 páginas</span>
+      <span class="pill">Año con más páginas totales</span>
+      <span class="pill">¿Qué tipos dominan en páginas?</span>
+    </div>
+  </section>
+
+  <section style="text-align:center">
+    <a class="btn" href="https://fstrike7.github.io/infovis/tp/Libros_Actualizados.csv" download>dataset usado</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <small>Prototipo visual - Faustino Beatrice</small>
+  </div>
+</footer>
 
 </body>
 </html>
