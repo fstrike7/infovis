@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TP · Visualización de datos personales (versión personal)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --c-novela: #9852D9;   /* Novela */
+      --c-comic:  #F54E8B;   /* Cómic */
+      --c-manga:  #2197FF;   /* Manga */
+      --c-cuento: #135AE1;   /* Cuentos */
+      --text:#111418; --muted:#5b6572; --bg:#fff; --sep:#e7ebf0; --chip:#f5f7fa; --maxw:960px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+    .container{max-width:var(--maxw);margin:0 auto;padding:28px 18px}
+    header,footer{border-bottom:1px solid var(--sep)}
+    footer{border-bottom:none;border-top:1px solid var(--sep)}
+    h1{margin:6px 0 4px;text-align:center;font-size:clamp(26px,3vw,38px);font-weight:800}
+    .sub{color:var(--muted);text-align:center;margin:0 0 16px;font-weight:600}
+    nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0 4px}
+    nav a{padding:6px 10px;background:var(--chip);border:1px solid var(--sep);border-radius:999px;color:inherit;text-decoration:none;font-weight:600}
+    section{padding:18px 0;border-bottom:1px solid #eef2f6}
+    section:last-of-type{border-bottom:none}
+    .question{text-align:center;margin:0 0 10px;font-size:clamp(20px,2.2vw,24px);font-weight:800}
+    .desc{max-width:760px;margin:0 auto 12px;color:#374151;text-align:center}
+    .viz{width:100%;display:block;border:0;background:#fafbfc}
+    figure{margin:0}
+    figcaption{color:var(--muted);font-size:.95rem;margin-top:8px;text-align:center}
+    .legend{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;border:1px solid var(--sep);background:var(--chip)}
+    .dot{width:12px;height:12px;border-radius:999px;display:inline-block}
+    .d-novela{background:var(--c-novela)} .d-comic{background:var(--c-comic)} .d-manga{background:var(--c-manga)} .d-cuento{background:var(--c-cuento)}
+    .btn{display:inline-block;padding:9px 12px;border-radius:8px;border:1px solid var(--sep);background:var(--chip);color:inherit;text-decoration:none;font-weight:600}
+    .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>Lecturas personales — Entrega final</h1>
+    <p class="sub"> · Herramientas utilizadas · </p>
+    <nav>
+      <a href="#flourish">Flourish</a>
+      <a href="#rawgraphs">RAWGraphs</a>
+      <a href="#datawrapper">DataWrapper</a>
+      <a href="#tableau">Tableau</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- 1) FLOURISH -->
+  <section id="flourish">
+    <h2 class="question">¿Qué proporción de mis lecturas son novelas frente a cuentos, cómics o mangas?</h2>
+    <p class="desc">Este treemap resume la composición de mis lecturas finalizadas por tipo.</p>
+    <figure>
+      <div class="viz flourish-embed flourish-hierarchy" data-src="visualisation/24751552">
+        <script src="https://public.flourish.studio/resources/embed.js"></script>
+        <noscript><img src="https://public.flourish.studio/visualisation/24751552/thumbnail" width="100%" alt="Treemap por tipo" /></noscript>
+      </div>
+      <figcaption>Treemap interactivo (Flourish).</figcaption>
+    </figure>
+  </section>
+
+  <!-- 2) RAWGRAPHS (personal: rachas por tipo en el tiempo) -->
+  <section id="rawgraphs">
+    <h2 class="question">¿Cuándo aparecen mis rachas de lectura y de qué tipo son?</h2>
+    <p class="desc">El área muestra el volumen de páginas que leí por semana y cómo se reparte por tipo.</p>
+    <figure>
+      <!-- Exportá desde RAWGraphs un Streamgraph o Stacked Area usando agg_por_dia_tipo.csv y esta misma paleta -->
+      <img class="viz" src="https://fstrike7.github.io/infovis/tp/tp_final/graphs/paginas_leidas.svg" alt="Rachas de lectura por tipo (RAWGraphs)">
+      <figcaption>Rachas de lectura por tipo a lo largo del tiempo (RAWGraphs, Streamgraph).</figcaption>
+    </figure>
+    <p>Se ven picos en los meses de vacaciones para las novelas, me enfoqué más en lecturas cortas durante el año y lecturas extensas en periodos de descanso.</p>
+  </section>
+
+  <!-- 3) DATAWRAPPER (meses) -->
+  <!-- <section id="datawrapper">
+    <h2 class="question">¿En qué meses suelo leer más?</h2>
+    <p class="desc">Un vistazo de <b>frecuencia</b>: conteo de sesiones por mes. Deberían destacarse enero, febrero y julio. Mantengo la paleta al asignar colores en el editor de DataWrapper.</p>
+    <figure>
+      <iframe title="Lecturas por mes" aria-label="Column chart" src="https://datawrapper.dwcdn.net/XXXX/1/" scrolling="no" frameborder="0" style="width:0;min-width:100%!important;border:none" height="480" data-external="1"></iframe>
+      <script>!function(){'use strict';window.addEventListener('message',function(a){if(void 0!==a.data['datawrapper-height']){var e=document.querySelectorAll('iframe');for(var t in a.data['datawrapper-height'])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){r.style.height=a.data['datawrapper-height'][t]+'px'}})})();</script>
+      <figcaption>Sesiones por mes (DataWrapper).</figcaption>
+    </figure>
+    <div class="btns">
+      <a class="btn" href="sandbox:/mnt/data/agg_por_mes.csv">CSV por mes</a>
+    </div>
+  </section> -->
+  
+  <!-- 4) TABLEAU (horas) -->
+  <section id="tableau">
+    <h2 class="question">¿A qué horas del día leo más?</h2>
+    <p class="desc">Las <b>sesiones</b> de lectura, independientemente de la hora cuando registré dicha lectura, me permiten analizar en qué períodos del día priorizo leer.</p>
+    <figure>
+      <div class='tableauPlaceholder' id='viz1756843016527' style='position: relative'><noscript><a href='#'><img alt='¿A qué horas del día leo más? ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Le&#47;Lecturaspersonales-horasdeldia&#47;Hoja2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Lecturaspersonales-horasdeldia&#47;Hoja2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Le&#47;Lecturaspersonales-horasdeldia&#47;Hoja2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1756843016527');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+      <figcaption>Distribución por hora (Tableau).</figcaption>
+      <p>Puedo observar que la lectura se da mayormente de noche o a partir de la tarde. Puede ser un punto a tener en cuenta para cambiar.</p>
+    </figure>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <small>Docente: Ariel Aizemberg. Alumno: Faustino Beatrice.</small>
+  </div>
+</footer>
+</body>
+</html>
